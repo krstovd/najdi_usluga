@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: local-services-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: najdi_usluga
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD:-root}
+    ports: ["3306:3306"]
+    volumes: ["mysql_data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  mysql_data:
