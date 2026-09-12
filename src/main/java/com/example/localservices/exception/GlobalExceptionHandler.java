@@ -40,6 +40,11 @@ public class GlobalExceptionHandler {
         return response(HttpStatus.UNAUTHORIZED, "Invalid email or password", request, Map.of());
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<ApiError> invalidBusinessInput(IllegalArgumentException ex, HttpServletRequest request) {
+        return response(HttpStatus.BAD_REQUEST, ex.getMessage(), request, Map.of());
+    }
+
     private ResponseEntity<ApiError> response(HttpStatus status, String message, HttpServletRequest request, Map<String, String> fields) {
         return ResponseEntity.status(status).body(new ApiError(Instant.now(), status.value(), status.getReasonPhrase(), message,
                 request.getRequestURI(), fields));

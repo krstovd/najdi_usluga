@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface ServiceProviderRepository extends JpaRepository<ServiceProvider, Long> {
     Optional<ServiceProvider> findByOwnerId(Long ownerId);
+    Optional<ServiceProvider> findByIdAndVerificationStatus(Long id, VerificationStatus status);
     Page<ServiceProvider> findAllByVerificationStatus(VerificationStatus status, Pageable pageable);
 }
