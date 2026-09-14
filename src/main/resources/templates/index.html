@@ -1,57 +1,28 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Find trusted local professionals, compare reviews and book a service near you.">
-    <title th:text="${applicationName}">Najdi Usluga</title><link rel="stylesheet" th:href="@{/css/app.css}">
-</head>
-<body class="home-page studio-home">
-<header class="topbar studio-nav">
-    <a class="brand" href="/" aria-label="Najdi Usluga home"><span class="brand-mark">N</span><span>Najdi Usluga</span></a>
-    <nav class="main-nav" aria-label="Main navigation"><a href="/search">Find a professional</a><a href="#services">Services</a><a href="#how-it-works">How it works</a></nav>
-    <nav class="nav-links" data-auth-nav></nav>
-</header>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Find trusted local professionals and book services near you."><title th:text="${applicationName}">Najdi Usluga</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="home-page modern-home">
+<header class="topbar modern-nav"><a class="brand" href="/" aria-label="Najdi Usluga home"><span class="brand-mark">N</span><span>Najdi Usluga</span></a><nav class="main-nav" aria-label="Main navigation"><a href="/search">Explore services</a><a href="#categories">Categories</a><a href="#how-it-works">How it works</a><a href="#providers">For professionals</a></nav><nav class="nav-links" data-auth-nav></nav></header>
 <main>
-    <section class="studio-hero">
-        <div class="studio-hero__topline"><span>Local services marketplace</span><span>Skopje · North Macedonia</span><span>Est. 2026</span></div>
-        <div class="studio-hero__grid">
-            <div class="studio-hero__copy">
-                <p class="studio-kicker">The right person for the job</p>
-                <h1>Local talent.<br><em>Properly found.</em></h1>
-                <p>Book trusted people for the jobs that matter—from everyday fixes to specialist care.</p>
-            </div>
-            <aside class="studio-feature" aria-label="Featured provider">
-                <div class="studio-feature__number">01</div>
-                <div class="studio-feature__visual"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="feature-monogram">UA</span><span class="feature-pin">⌖</span></div>
-                <div class="studio-feature__details"><span class="live-label"><i></i> Taking bookings</span><h2>Urban Auto Care</h2><p>Verified auto service · Skopje</p><div><span class="stars">★★★★★</span><strong>4.9</strong><small>124 reviews</small></div></div>
-            </aside>
-        </div>
-        <form class="studio-search" action="/search" method="get">
-            <label for="home-query">What can we help you with?</label>
-            <div><span aria-hidden="true">⌕</span><input id="home-query" name="query" type="search" placeholder="Try “car service”, “cleaning” or “dentist”"><button type="submit">Search services <b>↗</b></button></div>
-        </form>
-        <div class="studio-proof"><span>01 — Verified identities</span><span>02 — Transparent reviews</span><span>03 — Direct booking</span></div>
-    </section>
+<section class="market-hero">
+  <div class="market-hero__copy"><span class="market-label">THE EASIER WAY TO GET THINGS DONE</span><h1>Trusted local help,<br><em>right when you need it.</em></h1><p>Discover verified professionals in your area, compare real reviews and book with confidence.</p>
+    <form class="market-search" action="/search" method="get"><div><label for="hero-query">What service do you need?</label><span>⌕</span><input id="hero-query" name="query" type="search" placeholder="Mechanic, cleaning, home repair..."></div><button type="submit">Find services <b>→</b></button></form>
+    <div class="quick-links"><span>Popular:</span><a href="/search?query=mechanic">Mechanic</a><a href="/search?query=cleaning">Cleaning</a><a href="/search?query=repair">Home repair</a></div>
+    <div class="market-trust"><div><strong>100%</strong><span>Verified profiles</span></div><div><strong>Real</strong><span>Customer reviews</span></div><div><strong>Easy</strong><span>Online booking</span></div></div>
+  </div>
+  <div class="market-hero__media"><img src="/images/local-professionals-hero.png" alt="Local cleaning, automotive and repair professionals"><div class="photo-caption"><span><i></i> Available near you</span><strong>Skilled people. Real work.</strong></div><div class="review-float"><span>★★★★★</span><strong>4.9 average rating</strong><small>From verified customers</small></div></div>
+</section>
 
-    <section class="studio-services" id="services">
-        <header class="studio-section-head"><div><span class="section-index">01</span><p>Browse the directory</p></div><h2>Find expertise<br>for real life.</h2><a href="/search">All services <span>↗</span></a></header>
-        <div class="service-directory">
-            <a href="/search?query=auto"><span>01</span><h3>Auto care</h3><p>Diagnostics, repairs & maintenance</p><b>↗</b></a>
-            <a href="/search?query=repair"><span>02</span><h3>Home & repair</h3><p>Plumbing, electrical & renovation</p><b>↗</b></a>
-            <a href="/search?query=cleaning"><span>03</span><h3>Cleaning</h3><p>Homes, offices & deep cleaning</p><b>↗</b></a>
-            <a href="/search?query=beauty"><span>04</span><h3>Beauty & care</h3><p>Hair, grooming & personal care</p><b>↗</b></a>
-            <a href="/search?query=wellness"><span>05</span><h3>Health & wellness</h3><p>Fitness, therapy & wellbeing</p><b>↗</b></a>
-            <a href="/search?query=lessons"><span>06</span><h3>Lessons</h3><p>Tutors, coaches & new skills</p><b>↗</b></a>
-        </div>
-    </section>
+<section class="market-categories" id="categories"><div class="market-heading"><div><span>Popular categories</span><h2>Whatever you need,<br>there’s an expert for it.</h2></div><a href="/search">Browse all services →</a></div><div class="market-category-grid">
+  <a href="/search?query=repair"><div class="mc-icon">⌂</div><span>01</span><h3>Home services</h3><p>Repairs, plumbing, electrical and maintenance.</p><b>Explore →</b></a>
+  <a href="/search?query=cleaning"><div class="mc-icon">✦</div><span>02</span><h3>Cleaning</h3><p>Trusted help for homes and workplaces.</p><b>Explore →</b></a>
+  <a href="/search?query=auto"><div class="mc-icon">⌁</div><span>03</span><h3>Auto care</h3><p>Diagnostics, servicing and vehicle repair.</p><b>Explore →</b></a>
+  <a href="/search?query=beauty"><div class="mc-icon">◇</div><span>04</span><h3>Beauty & wellness</h3><p>Personal care, fitness and wellbeing.</p><b>Explore →</b></a>
+</div></section>
 
-    <section class="studio-method" id="how-it-works">
-        <div class="method-intro"><span class="section-index light">02</span><p>How it works</p><h2>Less searching.<br>More solving.</h2><p class="method-copy">A direct path from “I need help” to “consider it done”. No endless messages, no guesswork.</p></div>
-        <ol class="method-list"><li><span>01</span><div><h3>Describe the job</h3><p>Search by service and location.</p></div></li><li><span>02</span><div><h3>Compare the right people</h3><p>See verified profiles, ratings and availability.</p></div></li><li><span>03</span><div><h3>Book your time</h3><p>Send a request and manage it online.</p></div></li></ol>
-    </section>
+<section class="market-how" id="how-it-works"><div class="how-visual"><div class="how-map"><span class="route-line"></span><i class="map-dot d1"></i><i class="map-dot d2"></i><i class="map-dot d3"></i><div class="mini-provider"><span>MS</span><div><strong>Marko’s Services</strong><small>★ 4.9 · 1.2 km away</small></div></div></div></div><div class="how-copy"><span class="market-label">SIMPLE FROM START TO FINISH</span><h2>Book the right person in minutes.</h2><ol><li><span>1</span><div><strong>Search what you need</strong><p>Use a service, category or your location.</p></div></li><li><span>2</span><div><strong>Compare trusted profiles</strong><p>Check reviews, details and availability.</p></div></li><li><span>3</span><div><strong>Choose a time and book</strong><p>Manage the whole request from your account.</p></div></li></ol><a href="/search">Start searching →</a></div></section>
 
-    <section class="studio-provider" id="for-providers"><div><span>For local professionals</span><h2>Good at what you do?<br>Let your city know.</h2></div><div><p>Create your profile, set your schedule and turn nearby demand into lasting customer relationships.</p><a href="/register">Become a provider <b>↗</b></a></div></section>
+<section class="market-provider" id="providers"><div><span>Are you a local professional?</span><h2>Bring your skills<br>closer to customers.</h2></div><div><p>Build a trusted profile, manage your schedule and grow your business with customers nearby.</p><a href="/register">Create a provider account <b>→</b></a></div></section>
 </main>
-<footer class="studio-footer"><a class="brand" href="/"><span>Najdi Usluga</span></a><p>Local work. Real people. Better connections.</p><div><a href="/search">Directory</a><a href="/login">Log in</a><span>© 2026</span></div></footer>
-<script th:src="@{/js/nav.js}" defer></script>
-</body></html>
+<footer class="market-footer"><a class="brand" href="/"><span>Najdi Usluga</span></a><p>Making local services easier to find, compare and book.</p><nav><a href="/search">Services</a><a href="/login">Log in</a><a href="/register">Register</a></nav><small>© 2026 Najdi Usluga</small></footer>
+<script th:src="@{/js/nav.js}" defer></script></body></html>
