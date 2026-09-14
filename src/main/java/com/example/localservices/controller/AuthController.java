@@ -3,6 +3,7 @@ package com.example.localservices.controller;
 import com.example.localservices.dto.LoginRequest;
 import com.example.localservices.dto.RegisterRequest;
 import com.example.localservices.dto.UserResponse;
+import com.example.localservices.dto.UserUpdateRequest;
 import com.example.localservices.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,6 +45,11 @@ public class AuthController {
 
     @GetMapping("/me")
     UserResponse currentUser(Authentication authentication) { return userService.getByEmail(authentication.getName()); }
+
+    @PutMapping("/me")
+    UserResponse updateCurrentUser(Authentication authentication, @Valid @RequestBody UserUpdateRequest request) {
+        return userService.updateOwn(authentication.getName(), request);
+    }
 
     @GetMapping("/csrf")
     java.util.Map<String, String> csrf(CsrfToken token) {

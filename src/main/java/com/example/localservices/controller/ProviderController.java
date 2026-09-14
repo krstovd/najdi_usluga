@@ -19,6 +19,7 @@ public class ProviderController {
     @GetMapping("/{id}") ProviderResponse get(@PathVariable Long id) { return service.getPublic(id); }
     @GetMapping("/{id}/availability") List<AvailabilityResponse> availability(@PathVariable Long id) { return service.getAvailability(id); }
     @GetMapping("/me") ProviderResponse own(Authentication auth) { return service.getOwn(auth.getName()); }
+    @GetMapping("/me/availability") List<AvailabilityResponse> ownAvailability(Authentication auth) { return service.getOwnAvailability(auth.getName()); }
     @PostMapping @ResponseStatus(HttpStatus.CREATED)
     ProviderResponse create(Authentication auth, @Valid @RequestBody ProviderRequest request) { return service.create(auth.getName(), request); }
     @PutMapping("/me") ProviderResponse update(Authentication auth, @Valid @RequestBody ProviderRequest request) {

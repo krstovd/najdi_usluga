@@ -69,6 +69,13 @@ public class ProviderServiceImpl implements ProviderService {
         return availabilityRepository.findAllByServiceProviderIdOrderByDayOfWeek(providerId).stream().map(AvailabilityResponse::from).toList();
     }
 
+    @Override @Transactional(readOnly = true)
+    public List<AvailabilityResponse> getOwnAvailability(String ownerEmail) {
+        ServiceProvider provider = requireOwnedProvider(ownerEmail);
+        return availabilityRepository.findAllByServiceProviderIdOrderByDayOfWeek(provider.getId()).stream()
+                .map(AvailabilityResponse::from).toList();
+    }
+
     @Override @Transactional
     public List<AvailabilityResponse> replaceOwnAvailability(String ownerEmail, List<AvailabilityRequest> requests) {
         ServiceProvider provider = requireOwnedProvider(ownerEmail);

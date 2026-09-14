@@ -2,6 +2,7 @@ package com.example.localservices.service.impl;
 
 import com.example.localservices.dto.RegisterRequest;
 import com.example.localservices.dto.UserResponse;
+import com.example.localservices.dto.UserUpdateRequest;
 import com.example.localservices.entity.User;
 import com.example.localservices.entity.UserRole;
 import com.example.localservices.exception.DuplicateResourceException;
@@ -37,6 +38,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmailIgnoreCase(email)
                 .map(UserResponse::from)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+
+    @Override @Transactional
+    public UserResponse updateOwn(String email, UserUpdateRequest request) {
+        User user = userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        user.setFirstName(request.firstName().trim());
+        user.setLastName(request.lastName().trim());
+        user.setPhone(normalizeNullable(request.phone()));
+        return UserResponse.from(user);
     }
 
     private String normalizeNullable(String value) {

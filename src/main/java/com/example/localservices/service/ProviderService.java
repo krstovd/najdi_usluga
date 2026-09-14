@@ -13,6 +13,7 @@ public interface ProviderService {
     ProviderResponse getOwn(String ownerEmail);
     Page<ProviderResponse> listVerified(Pageable pageable);
     List<AvailabilityResponse> getAvailability(Long providerId);
+    List<AvailabilityResponse> getOwnAvailability(String ownerEmail);
     List<AvailabilityResponse> replaceOwnAvailability(String ownerEmail, List<AvailabilityRequest> requests);
     ProviderResponse changeVerificationStatus(Long providerId, VerificationStatus target);
 }

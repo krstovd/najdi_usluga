@@ -1,0 +1,6 @@
+(() => {
+  const container = document.querySelector('[data-auth-nav]'); if (!container) return;
+  function link(text, href) { const item = document.createElement('a'); item.className = 'text-link'; item.textContent = text; item.href = href; return item; }
+  async function logout() { const csrfResponse = await fetch('/api/auth/csrf'); const token = await csrfResponse.json(); await fetch('/api/auth/logout', { method: 'POST', headers: { [token.headerName]: token.token } }); window.location.assign('/'); }
+  fetch('/api/auth/me').then(async response => response.ok ? response.json() : null).then(user => { container.replaceChildren(); if (!user) { container.append(link('Log in', '/login'), link('Register', '/register')); return; } container.append(link(`${user.firstName} ${user.lastName}`, '/my/profile')); if (user.role === 'USER') container.append(link('Reservations', '/my/reservations'), link('Offer a service', '/provider/location')); if (user.role === 'PROVIDER') container.append(link('Provider dashboard', '/provider/dashboard')); if (user.role === 'ADMIN') container.append(link('Administration', '/admin')); const button = document.createElement('button'); button.className = 'nav-button'; button.textContent = 'Log out'; button.addEventListener('click', logout); container.append(button); }).catch(() => container.append(link('Log in', '/login')));
+})();

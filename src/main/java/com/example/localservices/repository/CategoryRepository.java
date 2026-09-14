@@ -10,4 +10,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Optional<Category> findBySlugAndActiveTrue(String slug);
     Page<Category> findAllByActiveTrue(Pageable pageable);
     boolean existsByNameIgnoreCase(String name);
+    boolean existsBySlugIgnoreCase(String slug);
 }

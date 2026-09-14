@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
 @EnableMethodSecurity
@@ -22,8 +23,12 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/error", "/api/auth/csrf", "/api/auth/register", "/api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/categories/**", "/api/providers", "/api/providers/{id}", "/api/providers/{id}/availability").permitAll()
+                        .requestMatchers("/", "/search", "/login", "/register", "/providers/**", "/css/**", "/js/**", "/images/**", "/error", "/api/auth/csrf", "/api/auth/register", "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/categories/**", "/api/providers").permitAll()
+                        .requestMatchers(RegexRequestMatcher.regexMatcher(HttpMethod.GET, "^/api/providers/[0-9]+(?:/availability)?$")).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/search").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reservations/providers/{providerId}/available-slots").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/providers/{providerId}").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .formLogin(login -> login.disable())

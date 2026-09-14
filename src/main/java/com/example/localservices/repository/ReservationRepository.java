@@ -17,6 +17,11 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Page<Reservation> findAllByUserId(Long userId, Pageable pageable);
     Page<Reservation> findAllByServiceProviderId(Long providerId, Pageable pageable);
+    List<Reservation> findAllByServiceProviderIdAndReservationDateAndStatusInOrderByStartTime(
+            Long providerId, LocalDate reservationDate, Collection<ReservationStatus> statuses);
+    long countByStatus(ReservationStatus status);
+    @Query("select r from Reservation r where (:status is null or r.status = :status)")
+    Page<Reservation> adminSearch(@Param("status") ReservationStatus status, Pageable pageable);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("""
