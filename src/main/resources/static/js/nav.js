@@ -18,6 +18,13 @@
     const destinations = { USER: ['/my/reservations', t('My bookings')], PROVIDER: ['/provider/dashboard', t('Dashboard')], ADMIN: ['/admin', t('Admin panel')] };
     const destination = destinations[user.role]; const dashboard = link(destination[1], destination[0]); dashboard.className = 'dashboard-link';
     const button = document.createElement('button'); button.className = 'logout-button'; button.type = 'button'; button.setAttribute('aria-label', t('Log out')); button.title = t('Log out'); button.innerHTML = '<span></span><b aria-hidden="true">↗</b>'; button.firstElementChild.textContent = t('Log out'); button.addEventListener('click', logout);
-    container.append(account, dashboard, button);
+    const menu = document.createElement('details'); menu.className = 'account-menu';
+    const summary = document.createElement('summary'); summary.className = 'account-menu-toggle';
+    summary.append(avatar, identity);
+    const panel = document.createElement('div'); panel.className = 'account-menu-panel';
+    account.textContent = t('Open my profile');
+    panel.append(account, dashboard, button); menu.append(summary, panel); container.append(menu);
+    document.addEventListener('click', event => { if (!menu.contains(event.target)) menu.open = false; });
+    menu.addEventListener('keydown', event => { if (event.key === 'Escape') { menu.open = false; summary.focus(); } });
   }).catch(() => container.append(link(t('Log in'), '/login')));
 })();

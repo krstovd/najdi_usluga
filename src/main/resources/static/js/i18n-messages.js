@@ -395,6 +395,12 @@ Search users…|Пребарај корисници…
 User #{id}|Корисник бр. {id}
 Reservation requested for {date} at {time}. Status: PENDING.|Побарана е резервација за {date} во {time}. Статус: на чекање.
 Reservation cannot transition from {status}|Не е дозволена промена од статусот {status}
+Not set|Не е внесено
+Working hours have not been set for this day. Contact the provider.|Не е внесено работно време за овој ден. Контактирајте го давателот на услуги.
+The provider is closed on this day. Choose another date.|Давателот на услуги не работи на овој ден. Изберете друг датум.
+No available times remain on this date. Choose another date.|Нема преостанати слободни термини за овој датум. Изберете друг датум.
+This provider has not published working hours yet. Contact the provider to arrange a time.|Овој давател сè уште нема објавено работно време. Контактирајте го за да договорите термин.
+These are suggested hours. Set your schedule and save it to make reservation times available.|Ова е предложено работно време. Поставете го распоредот и зачувајте го за да станат достапни термини за резервација.
 Language|Јазик
 km|км
 `.trim().split('\n').map(line => line.split('|')));
