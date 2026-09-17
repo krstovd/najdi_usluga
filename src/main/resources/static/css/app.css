@@ -1,4 +1,17 @@
 :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+/* The language control stays available on every page, including narrow screens. */
+.topbar { flex-wrap: wrap; }
+.topbar .brand, .topbar .language-control { flex-shrink: 0; }
+.language-control { display: flex; align-items: center; gap: .5rem; margin-block: .65rem; margin-left: auto; }
+.language-control select { width: auto; min-height: 42px; padding: .55rem .65rem; font-size: .8rem; }
+.language-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.auth-shell > .language-control { justify-content: flex-end; }
+.topbar.modern-nav .main-nav { margin-left: 0; gap: 1.25rem; }
+.topbar .brand > span:last-child { display: inline; }
+@media (max-width: 650px) {
+  .topbar .nav-links, .topbar .header-actions { flex-wrap: wrap; }
+  .topbar .language-control { margin-left: auto; }
+}
 * { box-sizing: border-box; }
 body { margin: 0; color: #152033; background: #f4f7fb; }
 .hero { min-height: calc(100vh - 64px); display: grid; place-items: center; padding: 2rem; background: radial-gradient(circle at top right, #dbeafe, transparent 45%), linear-gradient(135deg, #f8fafc, #eef2ff); }

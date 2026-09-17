@@ -131,7 +131,25 @@ Hibernate runs with `ddl-auto=validate`; Flyway owns schema changes:
 
 MySQL performs distance filtering with `ST_Distance_Sphere`; the application does not load every provider into Java for geographic searches.
 
-## Tests
+## Interface languages
+
+The interface defaults to Macedonian. Every page has a **Македонски / English** selector;
+the choice is saved in browser local storage. Switching reloads the current page while
+preserving its URL parameters and fragment. `?lang=mk` or `?lang=en` can also select a language.
+
+Translations live in `src/main/resources/static/js/i18n-messages.js`. Templates contain
+Macedonian fallback text with explicit `data-i18n-text` and attribute markers. Dynamic UI
+uses `I18n.t(message, parameters)`; dates and numbers use the selected locale. Translate
+display labels only: API enum values, category IDs/slugs and user-written names, descriptions,
+addresses and reviews retain their original values. New custom category names are shown as entered.
+
+Run the dependency-free localization checks with Node.js:
+
+```powershell
+node --test src/test/js/i18n.test.cjs
+```
+
+## Backend tests
 
 Run the complete suite:
 

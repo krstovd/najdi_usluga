@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Edit provider · Najdi Usluga</title><link rel="stylesheet" th:href="@{/css/app.css}"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></head>
+<html lang="mk" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title data-i18n-text="[[0,&quot;Edit provider · Najdi Usluga&quot;]]">Уреди давател на услуги · Најди Услуга</title><link rel="stylesheet" th:href="@{/css/app.css}"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""><script src="/js/i18n-messages.js" defer></script><script src="/js/i18n.js" defer></script></head>
 <body class="app-page" id="location-app">
-<header class="topbar"><a class="brand" href="/">Najdi Usluga</a><a class="text-link" href="/search">Search providers</a></header>
-<main class="editor-page"><section><p class="eyebrow">Provider dashboard</p><h1>Edit business and location</h1><p>Click the map, drag the marker, use your location, or find an address. Saving sends an updated profile for administrator verification.</p></section>
-  <div id="editor-status" class="notice">Loading your profile…</div>
+<header class="topbar"><a class="brand" href="/" data-i18n-text="[[0,&quot;Najdi Usluga&quot;]]">Најди Услуга</a><a class="text-link" href="/search" data-i18n-text="[[0,&quot;Search providers&quot;]]">Пребарај даватели на услуги</a><label class="language-control"><span class="language-label" data-i18n-text="[[0,&quot;Language&quot;]]">Јазик</span><select id="language-switcher" aria-label="Јазик" data-i18n-aria-label="Language"><option value="mk" lang="mk">Македонски</option><option value="en" lang="en">English</option></select></label></header>
+<main class="editor-page"><section><p class="eyebrow" data-i18n-text="[[0,&quot;Provider dashboard&quot;]]">Табла за даватели на услуги</p><h1 data-i18n-text="[[0,&quot;Edit business and location&quot;]]">Уреди бизнис и локација</h1><p data-i18n-text="[[0,&quot;Click the map, drag the marker, use your location, or find an address. Saving sends an updated profile for administrator verification.&quot;]]">Кликнете на мапата, поместете ја ознаката, користете ја вашата локација или најдете адреса. По зачувувањето, ажурираниот профил се испраќа на администраторска проверка.</p></section>
+  <div id="editor-status" class="notice" data-i18n-text="[[0,&quot;Loading your profile…&quot;]]">Се вчитува вашиот профил…</div>
   <form id="provider-form" class="editor-layout" hidden>
     <section class="form-card form-grid">
-      <label>Business name<input name="businessName" required maxlength="160"></label><label>Category<select name="categoryId" required></select></label>
-      <label class="wide">Description<textarea name="description" required maxlength="5000" rows="6"></textarea></label>
-      <label class="wide">Address<div class="inline-field"><input name="address" required maxlength="255"><button id="geocode-address" type="button" class="secondary">Find on map</button></div></label>
-      <label>City<input name="city" required maxlength="100"></label><label>Phone<input name="phone" required maxlength="30"></label>
-      <label>Email<input name="email" type="email" required maxlength="191"></label><label>Website<input name="website" type="url" maxlength="255" placeholder="https://"></label>
-      <label>Latitude<input name="latitude" type="number" step="0.0000001" min="-90" max="90" required></label><label>Longitude<input name="longitude" type="number" step="0.0000001" min="-180" max="180" required></label>
-      <div class="wide form-actions"><button id="use-editor-location" type="button" class="secondary">Use my location</button><button type="submit" class="primary">Save profile</button></div>
+      <label data-i18n-text="[[0,&quot;Business name&quot;]]">Име на бизнисот<input name="businessName" required maxlength="160"></label><label data-i18n-text="[[0,&quot;Category&quot;]]">Категорија<select name="categoryId" required></select></label>
+      <label class="wide" data-i18n-text="[[0,&quot;Description&quot;]]">Опис<textarea name="description" required maxlength="5000" rows="6"></textarea></label>
+      <label class="wide" data-i18n-text="[[0,&quot;Address&quot;]]">Адреса<div class="inline-field"><input name="address" required maxlength="255"><button id="geocode-address" type="button" class="secondary" data-i18n-text="[[0,&quot;Find on map&quot;]]">Најди на мапа</button></div></label>
+      <label data-i18n-text="[[0,&quot;City&quot;]]">Град<input name="city" required maxlength="100"></label><label data-i18n-text="[[0,&quot;Phone&quot;]]">Телефон<input name="phone" required maxlength="30"></label>
+      <label data-i18n-text="[[0,&quot;Email&quot;]]">Е-пошта<input name="email" type="email" required maxlength="191"></label><label data-i18n-text="[[0,&quot;Website&quot;]]">Веб-страница<input name="website" type="url" maxlength="255" placeholder="https://"></label>
+      <label data-i18n-text="[[0,&quot;Latitude&quot;]]">Географска ширина<input name="latitude" type="number" step="0.0000001" min="-90" max="90" required></label><label data-i18n-text="[[0,&quot;Longitude&quot;]]">Географска должина<input name="longitude" type="number" step="0.0000001" min="-180" max="180" required></label>
+      <div class="wide form-actions"><button id="use-editor-location" type="button" class="secondary" data-i18n-text="[[0,&quot;Use my location&quot;]]">Користи ја мојата локација</button><button type="submit" class="primary" data-i18n-text="[[0,&quot;Save profile&quot;]]">Зачувај профил</button></div>
     </section>
-    <aside><div id="editor-map" class="map editor-map" aria-label="Choose business location"></div><div id="editor-map-message" class="map-message" hidden></div><p class="map-help">The marker position is saved as the exact business coordinates.</p></aside>
+    <aside><div id="editor-map" class="map editor-map" aria-label="Изберете локација на бизнисот" data-i18n-aria-label="Choose business location"></div><div id="editor-map-message" class="map-message" hidden></div><p class="map-help" data-i18n-text="[[0,&quot;The marker position is saved as the exact business coordinates.&quot;]]">Позицијата на ознаката се зачувува како точна локација на бизнисот.</p></aside>
   </form>
 </main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script><script th:src="@{/js/provider-location.js}" defer></script>
