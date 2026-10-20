@@ -6,3 +6,14 @@ target/
 *.log
 .DS_Store
 Thumbs.db
+
+# Generated local TLS certificates and private keys
+certs/
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.key
+*.pem
+*.crt
+*.cer
