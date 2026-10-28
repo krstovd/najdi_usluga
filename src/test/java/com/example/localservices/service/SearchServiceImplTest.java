@@ -16,6 +16,19 @@ import static org.mockito.Mockito.*;
 
 class SearchServiceImplTest {
     @Test
+    void appliesDefaultSearchOptionsWhenCriteriaAreOmitted() {
+        ServiceProviderRepository repository = mock(ServiceProviderRepository.class);
+        when(repository.search(any(), any(), any(), any(), any(), any(), any(), any(Pageable.class)))
+                .thenReturn(new PageImpl<>(List.of()));
+
+        new SearchServiceImpl(repository).search(
+                new SearchCriteria(null, null, null, null, null, null, null, null, null));
+
+        verify(repository).search(isNull(), isNull(), isNull(), isNull(), eq(new BigDecimal("5")), isNull(),
+                eq("rating"), argThat(page -> page.getPageNumber() == 0 && page.getPageSize() == 20));
+    }
+
+    @Test
     void delegatesFilteringAndPaginationToDatabase() {
         ServiceProviderRepository repository = mock(ServiceProviderRepository.class);
         ProviderSearchProjection projection = mock(ProviderSearchProjection.class);
