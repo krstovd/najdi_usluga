@@ -52,5 +52,65 @@
       url.searchParams.set('lang', switcher.value);
       window.location.assign(url.href);
     });
+
+    const options = [...switcher.options];
+    const control = document.createElement('div');
+    control.className = 'language-menu';
+    control.innerHTML = `
+      <button class="language-menu__trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="${switcher.getAttribute('aria-label') || 'Language'}">
+        <span></span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+      </button>
+      <div class="language-menu__list" role="listbox" hidden></div>`;
+    const trigger = control.querySelector('.language-menu__trigger');
+    const triggerLabel = trigger.querySelector('span');
+    const list = control.querySelector('.language-menu__list');
+
+    function selectLanguage(value) {
+      switcher.value = value;
+      switcher.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    function syncSelection() {
+      const selected = options.find(option => option.value === switcher.value);
+      triggerLabel.textContent = selected?.textContent || switcher.value;
+      list.querySelectorAll('[role="option"]').forEach(option => {
+        const active = option.dataset.value === switcher.value;
+        option.setAttribute('aria-selected', String(active));
+        option.classList.toggle('is-selected', active);
+      });
+    }
+
+    options.forEach(option => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'language-menu__option';
+      item.setAttribute('role', 'option');
+      item.dataset.value = option.value;
+      item.lang = option.lang;
+      item.textContent = option.textContent;
+      item.addEventListener('click', () => selectLanguage(option.value));
+      list.append(item);
+    });
+    trigger.addEventListener('click', () => {
+      const opening = list.hidden;
+      list.hidden = !opening;
+      trigger.setAttribute('aria-expanded', String(opening));
+      if (opening) list.querySelector('[aria-selected="true"]')?.focus();
+    });
+    control.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !list.hidden) {
+        list.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!control.contains(event.target)) {
+        list.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+    syncSelection();
+    switcher.hidden = true;
+    switcher.insertAdjacentElement('afterend', control);
   }
 })();
